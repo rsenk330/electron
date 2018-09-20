@@ -7,9 +7,22 @@
 source_set("chrome") {
   visibility = [ "//electron:electron_lib" ]
   sources = [
+    "//chrome/browser/net/chrome_mojo_proxy_resolver_factory.cc",
+    "//chrome/browser/net/chrome_mojo_proxy_resolver_factory.h",
+    "//chrome/browser/net/proxy_config_monitor.cc",
+    "//chrome/browser/net/proxy_config_monitor.h",
+    "//chrome/browser/net/proxy_service_factory.cc",
+    "//chrome/browser/net/proxy_service_factory.h",
     "//chrome/browser/ssl/security_state_tab_helper.cc",
     "//chrome/browser/ssl/security_state_tab_helper.h",
+    "//chrome/common/pref_names.cc",
+    "//chrome/common/pref_names.h",
+    "//chrome/common/chrome_switches.cc",
+    "//chrome/common/chrome_switches.h",
   ]
   public_deps = [ "//content/public/browser" ]
-  deps = [ "//components/security_state/content" ]
+  deps = [
+    "//components/proxy_config",
+    "//components/security_state/content",
+  ]
 }

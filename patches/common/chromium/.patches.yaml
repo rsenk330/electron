@@ -449,3 +449,8 @@ patches:
   file: disable_extensions_gn.patch
   description: |
     Fix build files generation when chrome extensions are disabled.
+-
+  author: deepak1556 <hop2deep@gmail.com>
+  file: proxy_config_monitor.patch
+  description: |
+    Allow monitoring proxy config changes for a pref service.
