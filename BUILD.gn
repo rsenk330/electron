@@ -244,6 +244,7 @@ static_library("electron_lib") {
     "//base",
     "//base:i18n",
     "//chrome/common:constants",
+    "//components/net_log",
     "//components/network_session_configurator/common",
     "//components/prefs",
     "//components/printing/common",
