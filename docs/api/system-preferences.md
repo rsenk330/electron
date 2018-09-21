@@ -35,6 +35,14 @@ Returns:
 * `invertedColorScheme` Boolean - `true` if an inverted color scheme, such as
   a high contrast theme, is being used, `false` otherwise.
 
+### Event: 'appearance-changed' _macOS_
+
+Returns:
+
+* `newAppearance` String - Can be `dark` or `light`
+
+**NOTE:** This event is only emitted after you have called `startAppLevelAppearanceTrackingOS`
+
 ## Methods
 
 ### `systemPreferences.isDarkMode()` _macOS_
@@ -274,3 +282,43 @@ Returns `Boolean` - `true` if an inverted color scheme, such as a high contrast
 theme, is active, `false` otherwise.
 
 [windows-colors]:https://msdn.microsoft.com/en-us/library/windows/desktop/ms724371(v=vs.85).aspx
+
+### `systemPreferences.getEffectiveAppearance()` _macOS_
+
+Returns `String` - Can be `dark`, `light` or `unknown`.
+
+Gets the macOS appearance setting that is currently applied to your application,
+maps to [NSApplication.effectiverAppearance](https://developer.apple.com/documentation/appkit/nsapplication/2967171-effectiveappearance?language=objc)
+
+Please note that because Electron is not built targetting the 10.14 SDK your applications
+`effectiveAppearance` will always default to "light" and never automatically inherit the OS
+level setting.  We have provided a helper method `startAppLevelAppearanceTrackingOS()` which
+will emulate this behavior until we start targetting the 10.14 SDK.
+
+### `systemPreferences.getAppLevelAppearance()` _macOS_
+
+Returns `String` | `null` - Can be `dark`, `light` or `unknown`.
+
+Gets the macOS appearance setting that is you have declared you want for
+your application, maps to [NSApplication.appearance](https://developer.apple.com/documentation/appkit/nsapplication/2967170-appearance?language=objc).
+You can use the `setAppLevelAppearance` API to set this value.
+
+### `systemPreferences.setAppLevelAppearance(appearance)` _macOS_
+
+* `appearance` String | null - Can be `dark` or `light`
+
+Sets the appearance setting for your application, this should override the
+system default and override the value of `getEffectiveAppearance`.
+
+### `systemPreferences.startAppLevelAppearanceTrackingOS()` _macOS_
+
+This is a helper method to make your applications "appearance" setting track the
+users OS level appearance setting.  I.e. Your app will have dark mode enabled if
+the users system has dark mode enabled.
+
+You can track this automatic change with the `appearance-changed` event.
+
+### `systemPreferences.stopAppLevelAppearanceTrackingOS()` _macOS_
+
+This is a helper method to stop your application tracking the OS level appearance
+setting.  It is a no-op if you have not called `startAppLevelAppearanceTrackingOS()`
