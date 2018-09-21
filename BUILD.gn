@@ -887,6 +887,18 @@ group("licenses") {
   ]
 }
 
+copy("electron_mksnapshot") {
+  sources = []
+  if (is_win) {
+    sources += "mksnapshot.exe",
+  } else {
+    sources += "mksnapshot",
+  }
+  outputs = [
+    "$root_build_dir/{{source_file_part}}",
+  ]
+}
+
 action("electron_version") {
   script = "build/write_version.py"
   outputs = [
@@ -912,6 +924,26 @@ dist_zip("electron_ffmpeg_zip") {
   ]
   outputs = [
     "$root_build_dir/ffmpeg.zip",
+  ]
+}
+
+dist_zip("electron_native_mksnapshot_zip") {
+  data_deps = [
+    ":electron_mksnapshot",
+    ":licenses",
+  ]
+  outputs = [
+    "$root_build_dir/native_mksnapshot.zip",
+  ]
+}
+
+dist_zip("electron_mksnapshot_zip") {
+  data_deps = [
+    ":electron_mksnapshot",
+    ":licenses",
+  ]
+  outputs = [
+    "$root_build_dir/mksnapshot.zip",
   ]
 }
 
