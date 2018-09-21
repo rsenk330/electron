@@ -342,7 +342,8 @@ steps-native-mksnapshot-build: &steps-native-mksnapshot-build
         command: |
           cd src
           ninja -C out/native_mksnapshot v8:mksnapshot
-          ninja -C out/native_mksnapshot electron:electron_native_mksnapshot_zip
+          ninja -C out/native_mksnapshot electron:electron_mksnapshot_zip
+          cp out/mksnapshot/mksnapshot.zip out/native_mksnapshot/mksnapshot_native.zip
     - store_artifacts:
         path: src/out/native_mksnapshot/native_mksnapshot.zip
         destination: native_mksnapshot

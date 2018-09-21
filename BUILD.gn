@@ -890,9 +890,9 @@ group("licenses") {
 copy("electron_mksnapshot") {
   sources = []
   if (is_win) {
-    sources += "mksnapshot.exe",
+    sources += [ "mksnapshot.exe" ]
   } else {
-    sources += "mksnapshot",
+    sources += [ "mksnapshot" ]
   }
   outputs = [
     "$root_build_dir/{{source_file_part}}",
@@ -924,16 +924,6 @@ dist_zip("electron_ffmpeg_zip") {
   ]
   outputs = [
     "$root_build_dir/ffmpeg.zip",
-  ]
-}
-
-dist_zip("electron_native_mksnapshot_zip") {
-  data_deps = [
-    ":electron_mksnapshot",
-    ":licenses",
-  ]
-  outputs = [
-    "$root_build_dir/native_mksnapshot.zip",
   ]
 }
 
