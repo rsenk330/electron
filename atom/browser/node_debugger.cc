@@ -27,7 +27,7 @@ void NodeDebugger::Start() {
   if (inspector == nullptr)
     return;
 
-  std::vector<std::string> args{"Electron"};
+  std::vector<std::string> args;
   for (auto& arg : base::CommandLine::ForCurrentProcess()->argv()) {
 #if defined(OS_WIN)
     args.push_back(base::UTF16ToUTF8(arg));
