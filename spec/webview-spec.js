@@ -1266,8 +1266,7 @@ describe('<webview> tag', function () {
       if (div != null) div.remove()
     })
 
-    // TODO(alexeykuzmin): [Ch68] Enable the test.
-    xit('emits resize events', async () => {
+    it('emits resize events', async () => {
       const firstResizeSignal = waitForEvent(webview, 'resize')
       const domReadySignal = waitForEvent(webview, 'dom-ready')
 
