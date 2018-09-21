@@ -97,7 +97,7 @@ npm_action("atom_browserify_sandbox") {
     "-r",
     "./lib/sandboxed_renderer/api/exports/child_process.js:child_process",
     "-t",
-    "aliasify"
+    "aliasify",
   ]
 
   inputs = [
@@ -694,11 +694,11 @@ if (is_mac) {
 } else {
   windows_manifest("electron_app_manifest") {
     sources = [
+      "atom/browser/resources/win/disable_window_filtering.manifest",
+      "atom/browser/resources/win/dpi_aware.manifest",
       as_invoker_manifest,
       common_controls_manifest,
       default_compatibility_manifest,
-      "atom/browser/resources/win/dpi_aware.manifest",
-      "atom/browser/resources/win/disable_window_filtering.manifest",
     ]
   }
 
@@ -947,17 +947,14 @@ group("electron") {
 
 group("electron_content_manifest_overlays") {
   deps = [
-    ":electron_content_packaged_services_manifest_overlay",
     ":electron_content_browser_manifest_overlay",
+    ":electron_content_packaged_services_manifest_overlay",
   ]
 }
 
 service_manifest("electron_content_packaged_services_manifest_overlay") {
-  source =
-      "//electron/manifests/electron_content_packaged_services_manifest_overlay.json"
-  packaged_services = [
-    "//services/proxy_resolver:proxy_resolver_manifest",
-  ]
+  source = "//electron/manifests/electron_content_packaged_services_manifest_overlay.json"
+  packaged_services = [ "//services/proxy_resolver:proxy_resolver_manifest" ]
 }
 
 service_manifest("electron_content_browser_manifest_overlay") {
