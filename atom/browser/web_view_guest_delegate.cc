@@ -108,10 +108,12 @@ content::WebContents* WebViewGuestDelegate::CreateNewGuestWindow(
   guest_params.context = embedder_web_contents_->GetNativeView();
   std::unique_ptr<content::WebContents> guest_contents =
       content::WebContents::Create(guest_params);
+  content::RenderWidgetHost* render_widget_host =
+      guest_contents->GetRenderViewHost()->GetWidget();
   auto* guest_contents_impl =
       static_cast<content::WebContentsImpl*>(guest_contents.release());
-  guest_contents_impl->GetView()->CreateViewForWidget(
-      guest_contents->GetRenderViewHost()->GetWidget(), false);
+  guest_contents_impl->GetView()->CreateViewForWidget(render_widget_host,
+                                                      false);
 
   return guest_contents_impl;
 }
