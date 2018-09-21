@@ -1407,8 +1407,7 @@ describe('<webview> tag', function () {
     })
   })
 
-  // TODO(alexeykuzmin): [Ch68] Enable the tests.
-  xdescribe('nativeWindowOpen option', () => {
+  describe('nativeWindowOpen option', () => {
     beforeEach(() => {
       webview.setAttribute('allowpopups', 'on')
       webview.setAttribute('nodeintegration', 'on')
